@@ -9,11 +9,11 @@
 body > .navbar {
 	background-color: #BEA8A7 !important;
 }
-body > #big-content {
+body #big-content {
 	background-color: #F4DBD8;
 	min-height: 80vh;
 }
-body > #footer {
+body #footer {
 	background-color: #BEA8A7;
 }
 body #footer * {
@@ -21,4 +21,15 @@ body #footer * {
 }
 .card {
 	background-color: #F4DBD8;
+}
+.btn-primary {
+	background-color: #775144;
+	color: #F4DBD8;
+	border: 0;
+	border-bottom: 3px solid #BEA8A7;
+}
+.btn-primary:hover, .btn-primary:focus {
+	background-color: #BEA8A7;
+	border-bottom: 3px solid #775144;
+	color: #775144;
 }

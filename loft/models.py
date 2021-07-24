@@ -27,6 +27,7 @@ class Contact(models.Model):
     phone_number = models.CharField(max_length=25)
     email = models.EmailField(max_length=254)
     message = models.CharField(max_length=500)
+    date_of_birth = models.DateField(auto_now=False, null=True)
     loft = models.ForeignKey(Loft, on_delete=models.CASCADE, related_name="contacts")
     def __str__(self):
         return f'{self.username} ({self.phone_number}) - {self.email}: "{self.message[20]}"'
@@ -39,7 +40,7 @@ class Quizz(models.Model):
     age = models.IntegerField()
     comments = models.CharField(max_length=300)
     def __str__(self):
-        return f'{self.username} ({self.age}) {self.score}% "{self.comments[30]}", <{self.timestamp}>'
+        return f'{self.username} ({self.age}) {self.score}% "{self.comments[:30]}", <{self.timestamp}>'
 
 class Answer(models.Model):
 
@@ -49,3 +50,10 @@ class Answer(models.Model):
     answer = models.CharField(max_length=300)
     def __str__(self):
         return f'{self.question} ({self.answer})'
+
+class Comment(models.Model):
+
+    username = models.CharField(max_length=50, blank=True, null=True)
+    description = models.CharField(max_length=300)
+    def __str__(self):
+        return f'{self.username}: {self.description}'

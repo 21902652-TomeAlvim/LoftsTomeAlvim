@@ -16,7 +16,6 @@
     </div>
     <h2 class="title">Places For Rent</h2>
     <div class="container">
-        <!--<div class="row d-flex justify-content-center">-->
         <div class="card-group">
             {% for loft in lofts %}
                 <div class="card text-center">
@@ -36,6 +35,91 @@
             {% empty %}
                 No Lofts Available ATM
             {% endfor %}
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="jumbotron jumbotron-fluid text-center">
+            <h2 class="title">Quizz!</h2>
+            <p class="lead">Take this quizz, it's fun!</p>
+            <form action="{% url 'loft:quizz_form' %}" method="post">
+                {% csrf_token %}
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name"><br>
+                <label for="age">Age:</label><br>
+                <input type="number" id="age" name="age"><br>
+                <h6>Which framework is this website currently using?</h6>
+                <input type="radio" id="AngularJS" name="framework" value="AngularJS">
+                <label for="AngularJS">AngularJS</label><br>
+                <input type="radio" id="RubyonRails" name="framework" value="RubyonRails">
+                <label for="RubyonRails">Ruby on Rails</label><br>
+                <input type="radio" id="Django" name="framework" value="Django">
+                <label for="Django">Django</label>
+                <br>
+                <h6>Choose which cities have availabe apartments?</h6>
+                <input type="checkbox" id="lisbon" name="city1" value="lisbon">
+                <label for="lisbon">Lisbon</label><br>
+                <input type="checkbox" id="porto" name="city2" value="porto">
+                <label for="porto">Porto</label><br>
+                <input type="checkbox" id="paris" name="city3" value="paris">
+                <label for="paris">Paris</label><br>
+                <input type="checkbox" id="algarve" name="city4" value="algarve">
+                <label for="algarve">Algarve</label>
+                <br>
+                <h6>What does the website offers?</h6>
+                <select name="modality">
+                    <option value="rents" selected>Rents</option>
+                    <option value="purchases">Purchases</option>
+                    <option value="both">Both</option>
+                </select>
+                <br>
+                <label for="website_name">What's the Website's name?</label><br>
+                <input type="text" id="website_name" name="website_name"><br>
+                <h6>Is the website using Bootstrap and Font Awesome?<h6>
+                <input type="radio" id="yes" name="b_and_fa" value="yes">
+                <label for="yes">Yes!</label><br>
+                <input type="radio" id="no" name="b_and_fa" value="no">
+                <label for="no">No!</label><br>
+                Choose your Favourite Apartment:
+                <br>
+                <select name="select">
+                {% for loft in lofts %}
+                    <option value="{{loft.id}}" selected>{{loft.name}}</option>
+                {% endfor %}
+                </select>
+                <br>
+                <h6>Rate the website! :)</h6>
+                <input type="range" min="0" max="10" step="0.1">
+                <br>
+                <textarea name="textarea" cols=50 rows=5 placeholder="Leave a Comment..."></textarea>
+                <p class="lead m-0 p-4">
+                    <input type="submit" value="Send Quizz" class="btn btn-primary m-2">
+                </p>
+            </form>
+            <hr class="my-4">
+            <h2 class="title">Leave a comment!</h2>
+            <div class="row d-flex justify-content-center">
+                <div class="col">
+                    <form action="{% url 'loft:comment_form' %}" method="post">
+                        {% csrf_token %}
+                        {{ comment_f }}
+                        <input type="submit" value="Comment" class="btn btn-primary m-2">
+                    </form>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <h3 class="card-title title">Comments</h3>
+                        {% for comment in comments  %}
+                        <div class="card-header">
+                           {{ comment.username }}
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                {{ comment.description }}
+                            </p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
         </div>
     </div>
 {% endblock %}
