@@ -19,3 +19,6 @@ body > #footer {
 body #footer * {
 	color: black;
 }
+.card {
+	background-color: #F4DBD8;
+}

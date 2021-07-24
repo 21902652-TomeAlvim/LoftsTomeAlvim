@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/72e594ef21.js" crossorigin="anonymous"></script>
 {% load static %}
 <link rel="stylesheet" href="{% static 'loft/css/base.css' %}">
 </head>
@@ -28,19 +29,21 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="#">About Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" href="#">Info</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
+            Lofts
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            {% for loft in lofts %}
+              <li><a class="dropdown-item" href="#"> {{loft.name}} </a></li>
+            {% empty %}
+              <li><button class="dropdown-item">No Lofts ATM</button></li>
+            {% endfor %}
           </ul>
         </li>
       </ul>
@@ -48,19 +51,18 @@
   </div>
 </nav>
 <div id='big-content'>
-  <div class="container">
   {% block main %}
   {% endblock %}
-  </div>
 </div>
 <div id="footer" class="card text-center">
   <div class="card-header">
     Featured
   </div>
   <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h5 class="card-title">Social</h5>
+    <p class="card-text">Follow Us</p>
+    <p class="card-text"><i class="fab fa-facebook-f"></i><i class="fab fa-instagram"></i><i class="fab fa-whatsapp"></i><i class="fab fa-github-square"></i></p>
+    <p class="text-muted">Copyright</p>
   </div>
 </div>
 

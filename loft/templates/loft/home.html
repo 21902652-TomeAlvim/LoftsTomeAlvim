@@ -1,6 +1,41 @@
 {% extends 'loft/base.html' %}
 
 {% block main %}
-    <h3>Titulo</h3>
-    <p>texto texto texto texto texto texto texto </p>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'loft/css/home.css' %}">
+    
+    <div class="card text-center" id="intro-card">
+        <div class="card-header">
+            Apartment
+        </div>
+        <div class="card-body">
+            <h1 class="card-title title">How we optimise your revenues?</h1>
+            <p class="card-text">We monitor and analyse the performance of properties in your area. We monitor the demand. We look at relevant variables including the demand levels for rentals.</p>
+            <a href="#" class="btn btn-primary">Find an Apartment</a>
+        </div>
+    </div>
+    <h2 class="title">Places For Rent</h2>
+    <div class="container">
+        <!--<div class="row d-flex justify-content-center">-->
+        <div class="card-group">
+            {% for loft in lofts %}
+                <div class="card text-center">
+                    {% load static %}
+                    <img src="{% get_static_prefix %}loft/images/cities/{{loft.city.name}}.png" class="card-img-top" alt="{{loft.name}}">
+                    <div class="card-body">
+                        <h5 class="card-title title">{{loft.name}}</h5>
+                        <p class="card-text">{{loft.city}} | {{loft.address}} | {{loft.description}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-around">
+                            <small class="text-muted">${{loft.price}}</small>
+                            <a href="#" class="btn btn-secondary">Info</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                No Lofts Available ATM
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

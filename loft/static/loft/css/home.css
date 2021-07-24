@@ -1,0 +1,10 @@
+#intro-card {
+    border: 0;
+}
+.title {
+    text-align: center;
+    text-decoration: underline;
+}
+.card-img-top {
+    height: 200px;
+}
