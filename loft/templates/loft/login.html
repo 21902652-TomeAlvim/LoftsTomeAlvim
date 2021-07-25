@@ -1,0 +1,35 @@
+{% extends 'loft/base.html' %}
+
+{% block main %}
+{% load static %}
+<script src={% static 'loft/js/login.js' %}></script>
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Login / Sign Up</h1>
+        <p class="lead">
+            <button id="login_button" class="btn btn-primary btn-lg" role="button">Login</button>
+            <button id="sign_up_button" class="btn btn-primary btn-lg" role="button">Sign Up</button>
+        </p>
+        <p class="lead">Choose Login or Sign Up.</p>
+        <div id="login" class="hidden">
+            <h5>Login</h5>
+            <form action="{% url 'loft:login' %}" method="post">
+                {% csrf_token %}
+                {{ login_form.as_ul }}
+                <input class="btn btn-primary mt-2" type="submit" value="Submit">
+            </form>
+        </div>
+        <div id="signup" class="hidden">
+            <h5>Sign Up</h5>
+            <form action="{% url 'loft:sign_up' %}" method="post">
+                {% csrf_token %}
+                {{ signup_form.as_ul }}
+                <input class="btn btn-primary mt-2" type="submit" value="Submit">
+            </form>
+        </div>
+        <hr class="my-4">
+        <p>Create an account in order to add apartments and see the website stats.</p>
+
+    </div>
+</div>
+{% endblock %}

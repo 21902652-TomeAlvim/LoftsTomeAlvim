@@ -1,0 +1,46 @@
+{% extends 'loft/base.html' %}
+
+{% block main %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'loft/css/loft_page.css' %}">
+
+    <div class="d-flex justify-content-around">
+        <div class="col jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">{{ loft.city.country }} | {{ loft.name }} | {{ loft.city.name }} </h1>
+                <h6> <button class="btn btn-primary">$ {{loft.price}}/mth </button></h6>
+                <p class="lead">{{ loft.description }}</p>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="m-0">Amenities</h3>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for amenity in loft.amenities.all %}
+                            <li class="list-group-item"> {{ amenity.name }} </li>
+                        {% empty %}
+                            <li class="list-group-item"> No Amenities Founded... </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <p>{{ loft.long_description }}</p>
+            </div>
+            <div class="text-center">
+                <hr>
+                <h5>Interested on this Apartment?</h5>
+                <h6> Contact Us </h6>
+                <form action="{% url 'loft:contact' loft.id %}" method="post">
+                    {% csrf_token %}
+                    {{ contact_form.as_ul }}
+                    <input class="btn btn-primary mt-2" type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+        <div class="col card" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+                {% for l in lofts  %}
+                    <a href="{% url 'loft:loft_page' l.id %}"><li class="list-group-item"> {{ l.name }} | {{ l.city.name }} </li></a>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

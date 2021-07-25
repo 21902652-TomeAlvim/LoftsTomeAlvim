@@ -1,0 +1,11 @@
+.card {
+    border: none;
+}
+.card .list-group * {
+    background-color: #BEA8A7;
+    text-decoration: none;
+    border-top: 0;
+}
+.card .list-group a:hover {
+    opacity: 0.8;
+}

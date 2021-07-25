@@ -28,7 +28,7 @@
                     <div class="card-footer">
                         <div class="d-flex justify-content-around">
                             <small class="text-muted">${{loft.price}}</small>
-                            <a href="#" class="btn btn-secondary">Info</a>
+                            <a href="{% url 'loft:loft_page' loft.id %}" class="btn btn-secondary">Info</a>
                         </div>
                     </div>
                 </div>
@@ -44,9 +44,9 @@
             <form action="{% url 'loft:quizz_form' %}" method="post">
                 {% csrf_token %}
                 <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name"><br>
+                <input type="text" id="name" name="name" required><br>
                 <label for="age">Age:</label><br>
-                <input type="number" id="age" name="age"><br>
+                <input type="number" id="age" name="age" required><br>
                 <h6>Which framework is this website currently using?</h6>
                 <input type="radio" id="AngularJS" name="framework" value="AngularJS">
                 <label for="AngularJS">AngularJS</label><br>
@@ -73,7 +73,7 @@
                 </select>
                 <br>
                 <label for="website_name">What's the Website's name?</label><br>
-                <input type="text" id="website_name" name="website_name"><br>
+                <input type="text" id="website_name" name="website_name" required><br>
                 <h6>Is the website using Bootstrap and Font Awesome?<h6>
                 <input type="radio" id="yes" name="b_and_fa" value="yes">
                 <label for="yes">Yes!</label><br>
@@ -90,7 +90,7 @@
                 <h6>Rate the website! :)</h6>
                 <input type="range" min="0" max="10" step="0.1">
                 <br>
-                <textarea name="textarea" cols=50 rows=5 placeholder="Leave a Comment..."></textarea>
+                <textarea name="textarea" class="form-control" placeholder="Leave a Comment..." required></textarea>
                 <p class="lead m-0 p-4">
                     <input type="submit" value="Send Quizz" class="btn btn-primary m-2">
                 </p>

@@ -1,0 +1,15 @@
+{% extends 'loft/base.html' %}
+
+{% block main %}
+    <div class="container">
+        <h1> Result ({{ quizz.score }}%) [{{ quizz.timestamp }}]</h1>
+        <h3>Here are your answers, {{ quizz.username }} ({{ quizz.age }} y.o.)</h3>
+        <hr>
+        {% for answer in quizz.answers.all %}
+            <p>Q. {{ answer.question }}</p>
+            <p>A. {{ answer.answer }} <small> *{{ answer.correct }}* </small></p>
+        {% endfor %}
+        Your comments:
+        <p class="m-0 pb-4">{{ quizz.comments }}</p>
+    </div>
+{% endblock %}

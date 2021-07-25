@@ -20,28 +20,35 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">🏚️</a>
+    <a class="navbar-brand" href="{% url 'loft:home' %}">🏚️</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'loft:home' %}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
+          {% if user.is_authenticated %}
+            <a class="nav-link" href="../admin">Admin</a>
+          {% else %}
+            <a class="nav-link" href="{% url 'loft:login' %}">Log In</a>
+          {% endif %}
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Info</a>
-        </li>
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'loft:profile' %}">Profile</a>
+          </li>
+        {% endif %}
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Lofts
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             {% for loft in lofts %}
-              <li><a class="dropdown-item" href="#"> {{loft.name}} </a></li>
+              <li><a class="dropdown-item" href="{% url 'loft:loft_page' loft.id %}"> {{loft.name}} </a></li>
             {% empty %}
               <li><button class="dropdown-item">No Lofts ATM</button></li>
             {% endfor %}

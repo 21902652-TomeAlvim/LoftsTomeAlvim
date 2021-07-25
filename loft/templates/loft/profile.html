@@ -1,0 +1,43 @@
+{% extends 'loft/base.html' %}
+
+{% block main %}
+    <h3 class="text-center"> Lofts </h3>
+    <div class="container">
+        <div class="card-group">
+            {% for loft in lofts  %}
+            <div class="card">
+                {% load static %}
+                <img src="{% get_static_prefix %}loft/images/cities/{{loft.city.name}}.png" class="card-img-top" alt="{{loft.name}}">
+                <div class="card-body">
+                    <h5 class="card-title"> {{ loft.city.country }} | {{  loft.name }} | {{ loft.city.name }} </h5>
+                    <p class="card-text"> {{ loft.description }} <small class="text-muted"> ${{ loft.price }}</small></p>
+                    <a href="{% url 'loft:delete_loft' loft.id %}" class="btn btn-danger d-block"> Destroy </a>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="card text-center">
+               <a href="../admin" id="add_loft" class="btn btn-primary m-auto p-5"><h1 class="display-1"><i class="far fa-plus-square"></i></h1></a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h3 class="text-center"> Contacts </h3>
+    <div class="container">
+        <div class="card-group">
+            {% for contact in contacts  %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> {{ contact.username }} ({{  contact.phone_number }}) *{{ contact.date_of_birth }}* </h5>
+                    <p class="card-text"> {{ contact.message }} <small class="text-muted"> {{ contact.loft }}</small></p>
+                    <a href="{% url 'loft:delete_contact' contact.id %}" class="btn btn-danger d-block"> Destroy </a>
+                </div>
+            </div>
+            {% empty %}
+                <div class="card-body">
+                    <h5 class="card-title">No Contacts Founded...</h5>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <a href="{% url 'loft:logout' %}" class="btn btn-info d-block">Log Out</a>
+{% endblock %}

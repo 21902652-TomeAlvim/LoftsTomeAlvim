@@ -33,3 +33,15 @@ body #footer * {
 	border-bottom: 3px solid #775144;
 	color: #775144;
 }
+.card-img-top {
+    height: 200px;
+}
+.hidden {
+	display: none;
+}
+#add_loft i {
+	color: #F4DBD8;
+}
+#add_loft i:hover {
+	color: #775144;
+}

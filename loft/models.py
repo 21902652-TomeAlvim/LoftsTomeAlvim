@@ -10,13 +10,20 @@ class City(models.Model):
     def __str__(self):
         return f'{self.name}, {self.country} ({self.abbreviation})'
 
+class Amenity(models.Model):
+
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
 class Loft(models.Model):
 
+    amenities = models.ManyToManyField(Amenity, related_name="apartments", blank=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='lofts')
     address = models.CharField(max_length=250)
     price = models.IntegerField()
     size = models.IntegerField()
     description = models.CharField(max_length=100)
+    long_description = models.CharField(max_length=800)
     name = models.CharField(max_length=100)
     def __str__(self):
         return f'{self.city.name}, {self.name} - {self.address}'
